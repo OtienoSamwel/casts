@@ -7,5 +7,5 @@ import retrofit2.http.Query
 
 interface ApiEndpoints {
     @GET("/api/v2/search")
-    suspend fun searchPodcasts(@Query("q") q: String): Flow<PodcastResponse>
+    suspend fun searchPodcasts(@Query("q") q: String): PodcastResponse
 }
