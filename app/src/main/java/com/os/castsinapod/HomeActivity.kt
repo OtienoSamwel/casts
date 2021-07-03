@@ -21,12 +21,11 @@ class HomeActivity : AppCompatActivity() {
         setContentView(binding.root)
         recyclerView = binding.recyclerView
 
-        viewModel.getResults(binding.search.toString())
-        
-        binding.searchButton.setOnClickListener {
-            viewModel.data.observe(this) {
-                recyclerView.adapter = SearchAdapter(it, this)
-            }
-        }
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navController = navHostFragment.navController
+
+        val bottomNav = binding.bottomNavigation
+            bottomNav.setupWithNavController(navController)
     }
 }
