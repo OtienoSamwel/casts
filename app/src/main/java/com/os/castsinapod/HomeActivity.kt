@@ -14,7 +14,6 @@ class HomeActivity : AppCompatActivity() {
 
     private val viewModel: HomeViewModel by viewModels()
     private lateinit var binding: ActivityHomeBinding
-    private lateinit var recyclerView: RecyclerView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
@@ -26,6 +25,6 @@ class HomeActivity : AppCompatActivity() {
         val navController = navHostFragment.navController
 
         val bottomNav = binding.bottomNavigation
-            bottomNav.setupWithNavController(navController)
+        bottomNav.setupWithNavController(navController)
     }
 }
