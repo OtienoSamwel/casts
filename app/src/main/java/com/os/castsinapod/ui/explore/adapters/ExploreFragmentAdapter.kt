@@ -21,8 +21,10 @@ class ExploreFragmentAdapter(fragment: Fragment) : FragmentStateAdapter(fragment
             "Self-Improvement",
             "TV & Film",
             "Music",
-            "Sport"
+            "Sports"
         )
+
+        var positioning: Int = 0
     }
 
     override fun getItemCount(): Int {
@@ -30,6 +32,7 @@ class ExploreFragmentAdapter(fragment: Fragment) : FragmentStateAdapter(fragment
     }
 
     override fun createFragment(position: Int): Fragment {
+        positioning = position
         return ExploreFeaturesFragment()
     }
 }

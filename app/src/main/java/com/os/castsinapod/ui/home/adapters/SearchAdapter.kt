@@ -8,10 +8,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.os.castsinapod.R
 import com.os.castsinapod.domain.models.PodcastResponse
 
-class SearchAdapter(private val data: PodcastResponse, private val context: Context) :
+class SearchAdapter(private val data: PodcastResponse, private val context: Context,private val onClick:() -> Unit) :
     RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
 
     class SearchViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -28,9 +29,14 @@ class SearchAdapter(private val data: PodcastResponse, private val context: Cont
 
     override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
         val data = data.results[position]
+        holder.itemView.setOnClickListener { onClick() }
         holder.description.text = data.description_original
         holder.title.text = data.title_original
-        Glide.with(context).load(data.thumbnail).into(holder.thumbnail)
+        Glide.with(context)
+            .load(data.thumbnail)
+            .centerCrop()
+            .transform(RoundedCorners(10))
+            .into(holder.thumbnail)
     }
 
     override fun getItemCount(): Int {
