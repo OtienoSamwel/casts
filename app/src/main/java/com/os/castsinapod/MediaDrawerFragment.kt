@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.fragment.navArgs
 import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.ui.StyledPlayerView
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -43,10 +44,11 @@ class MediaDrawerFragment @Inject constructor() : BottomSheetDialogFragment() {
         playerView.player = castPlayer
     }
 
-    private fun startPlayer() {
+    private fun startPlayer(url: String) {
         requireActivity().startService(
-            Intent(activity, PlayerService::class.java)
+            Intent(activity, PlayerService::class.java).apply {
+                action = url
+            }
         )
     }
-
 }
