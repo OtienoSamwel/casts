@@ -6,7 +6,7 @@ import com.os.castsinapod.domain.models.PodcastsResponse
 import javax.inject.Inject
 
 class RepositoryImpl @Inject constructor(private val api: ApiEndpoints) : Repository {
-    override suspend fun getPodcasts(q: String): PodcastResponse {
+    override suspend fun getPodcasts(q: String): PodcastsResponse {
         return api.searchPodcasts(q)
     }
 
