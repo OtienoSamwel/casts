@@ -9,6 +9,10 @@ import com.os.castsinapod.R
 
 @AndroidEntryPoint
 class DetailFragment : Fragment() {
+    private var _binding: FragmentDetailBinding? = null
+    private val binding: FragmentDetailBinding get() = _binding!!
+    private val viewModel: DetailViewModel by viewModels()
+    private val args: DetailFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
