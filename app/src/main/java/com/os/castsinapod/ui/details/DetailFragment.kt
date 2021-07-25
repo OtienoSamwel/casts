@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.os.castsinapod.R
 
+@AndroidEntryPoint
 class DetailFragment : Fragment() {
 
     override fun onCreateView(
