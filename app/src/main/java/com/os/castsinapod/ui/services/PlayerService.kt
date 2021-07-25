@@ -45,10 +45,6 @@ class PlayerService : LifecycleService() {
 
 
     private fun getPlayerViewIntent(): PendingIntent {
-        val intent = Intent(this, HomeActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
-        }
-
         return NavDeepLinkBuilder(this)
             .setGraph(R.navigation.main_nav_graph)
             .setDestination(R.id.mediaDrawerFragment)
