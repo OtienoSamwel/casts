@@ -15,6 +15,8 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
+    private var _binding: FragmentHomeBinding? = null
+    private val binding: FragmentHomeBinding get() = _binding!!
     private val viewModel: HomeFragmentViewModel by viewModels()
 
 
@@ -36,8 +38,8 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun onClick(){
-        val action = HomeFragmentDirections.actionHomeFragmentToMediaDrawerFragment()
-        view?.findNavController()?.navigate(action)
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }
