@@ -68,7 +68,7 @@ class PlayerService : LifecycleService() {
     }
 
 
-    private fun createPlayerNotificationManager() {
+    private fun createPlayerNotificationManager(url: String) {
         startForeground(NOTIFICATION_ID, getNotificationBuilder().build())
 
         val playerNotificationManager = PlayerNotificationManager.Builder(
@@ -79,9 +79,7 @@ class PlayerService : LifecycleService() {
         ).build()
         playerNotificationManager.setPlayer(player)
         val mediaItem =
-            MediaItem.fromUri(
-                "https://www.listennotes.com/e/p/ea09b575d07341599d8d5b71f205517b/"
-            )
+            MediaItem.fromUri(url)
         player.setMediaItem(mediaItem)
         player.prepare()
     }
