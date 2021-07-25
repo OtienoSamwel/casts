@@ -19,6 +19,7 @@ class MediaDrawerFragment @Inject constructor() : BottomSheetDialogFragment() {
 
     @Inject
     lateinit var castPlayer: SimpleExoPlayer
+    private val args: MediaDrawerFragmentArgs by navArgs()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
