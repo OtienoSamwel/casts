@@ -26,8 +26,6 @@ class MediaDrawerFragment @Inject constructor() : BottomSheetDialogFragment() {
         if (!castPlayer.isPlaying) {
             startPlayer(args.audioUrl)
         }
-
-        Toast.makeText(requireContext(),"Launched Service",Toast.LENGTH_SHORT).show()
     }
 
     override fun onCreateView(
