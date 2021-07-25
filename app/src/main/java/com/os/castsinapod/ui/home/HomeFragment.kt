@@ -8,10 +8,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.os.castsinapod.R
+import com.google.android.exoplayer2.SimpleExoPlayer
+import com.os.castsinapod.databinding.FragmentHomeBinding
 import com.os.castsinapod.ui.home.adapters.SearchAdapter
 import com.os.castsinapod.ui.home.viewmodels.HomeFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
@@ -19,7 +21,8 @@ class HomeFragment : Fragment() {
     private val binding: FragmentHomeBinding get() = _binding!!
     private val viewModel: HomeFragmentViewModel by viewModels()
 
-
+    @Inject
+    lateinit var player: SimpleExoPlayer
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
