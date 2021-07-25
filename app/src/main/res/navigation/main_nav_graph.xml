@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_homeFragment_to_mediaDrawerFragment"
             app:destination="@id/mediaDrawerFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
     </fragment>
     <fragment
         android:id="@+id/exploreFragment"
@@ -42,5 +45,18 @@
         android:id="@+id/mediaDrawerFragment"
         android:name="com.os.castsinapod.MediaDrawerFragment"
         android:label="fragment_media_drawer"
-        tools:layout="@layout/fragment_media_drawer" />
+        tools:layout="@layout/fragment_media_drawer" >
+        <argument
+            android:name="audioUrl"
+            app:argType="string" />
+    </dialog>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.os.castsinapod.ui.details.DetailFragment"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_detail" >
+        <argument
+            android:name="podcastId"
+            app:argType="string" />
+    </fragment>
 </navigation>
