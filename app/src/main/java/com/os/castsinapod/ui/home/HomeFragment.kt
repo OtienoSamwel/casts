@@ -30,10 +30,13 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val recyclerView: RecyclerView = view.findViewById(R.id.home_fragment_recycler_view)
+        val recyclerView: RecyclerView = binding.homeFragmentRecyclerView
+
+        binding.viewStub.visibility = View.VISIBLE
         viewModel.getResults("harry")
         viewModel.data.observe(viewLifecycleOwner) {
-            recyclerView.adapter = SearchAdapter(it, requireContext()) { onClick() }
+            binding.viewStub.visibility =View.INVISIBLE
+            recyclerView.adapter = SearchAdapter(it)
         }
     }
 
