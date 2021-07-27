@@ -1,6 +1,6 @@
 package com.os.castsinapod.domain.models
 
-data class PodcastResponse(
+data class PodcastsResponse(
     val count: Int,
     val next_offset: Int,
     val results: List<Result>,
