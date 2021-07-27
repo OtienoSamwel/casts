@@ -13,8 +13,6 @@ import androidx.navigation.NavDeepLinkBuilder
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.ui.PlayerNotificationManager
-import com.os.castsinapod.HomeActivity
-import com.os.castsinapod.MediaDrawerFragment
 import com.os.castsinapod.R
 import com.os.castsinapod.ui.services.adapter.PlayerDescriptionAdapter
 import com.os.castsinapod.ui.utils.Constants.NOTIFICATION_CHANNEL_ID
@@ -39,7 +37,9 @@ class PlayerService : LifecycleService() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         createNotificationChannel()
-        createPlayerNotificationManager()
+        intent?.let {
+            createPlayerNotificationManager(it.action!!)
+        }
         return super.onStartCommand(intent, flags, startId)
     }
 
@@ -78,12 +78,15 @@ class PlayerService : LifecycleService() {
             MediaItem.fromUri(url)
         player.setMediaItem(mediaItem)
         player.prepare()
+        player.play()
     }
 
     private fun stopService() {
-        notificationManager.cancel(NOTIFICATION_ID)
-        stopForeground(true)
-        stopSelf()
+        if (!player.isPlaying) {
+            notificationManager.cancel(NOTIFICATION_ID)
+            stopForeground(false)
+            //stopSelf()
+        }
     }
 
     private fun getNotificationBuilder(): NotificationCompat.Builder {
