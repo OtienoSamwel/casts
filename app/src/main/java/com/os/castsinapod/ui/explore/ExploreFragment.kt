@@ -14,15 +14,18 @@ import com.os.castsinapod.ui.explore.adapters.ExploreFragmentAdapter
 
 class ExploreFragment : Fragment() {
 
+    private var _binding: FragmentExploreBinding? = null
+    private val binding: FragmentExploreBinding get() = _binding!!
     private lateinit var viewpager: ViewPager2
     private lateinit var exploreFragmentAdapter: ExploreFragmentAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_explore, container, false)
+        _binding = FragmentExploreBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -37,5 +40,10 @@ class ExploreFragment : Fragment() {
         TabLayoutMediator(tabLayout, viewpager) { tab, position ->
             tab.text = ExploreFragmentAdapter.myFragmentLabels[position]
         }.attach()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }
