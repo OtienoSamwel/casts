@@ -8,4 +8,6 @@
     <string name="home">Home</string>
     <string name="explore">Explore</string>
     <string name="activity">Activity</string>
+
+    <string name="episodes">%d %s</string>
 </resources>
