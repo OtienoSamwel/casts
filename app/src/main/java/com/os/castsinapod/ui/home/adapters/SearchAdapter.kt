@@ -1,42 +1,59 @@
 package com.os.castsinapod.ui.home.adapters
 
-import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.os.castsinapod.R
-import com.os.castsinapod.domain.models.PodcastResponse
+import com.os.castsinapod.databinding.SearchItemBinding
+import com.os.castsinapod.domain.models.PodcastsResponse
+import com.os.castsinapod.ui.home.HomeFragmentDirections
 
-class SearchAdapter(private val data: PodcastResponse, private val context: Context,private val onClick:() -> Unit) :
+class SearchAdapter(private val data: PodcastsResponse) :
     RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
-
-    class SearchViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val thumbnail: ImageView = view.findViewById(R.id.thumbnail)
-        val title: TextView = view.findViewById(R.id.title)
-        val description: TextView = view.findViewById(R.id.description)
+    companion object {
+        var place = 0
     }
 
+    class SearchViewHolder(val binding: SearchItemBinding) : RecyclerView.ViewHolder(binding.root)
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
-        return SearchViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.search_item, parent, false)
+        val binding = SearchItemBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
         )
+        return SearchViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
+        place = position
         val data = data.results[position]
-        holder.itemView.setOnClickListener { onClick() }
-        holder.description.text = data.description_original
-        holder.title.text = data.title_original
-        Glide.with(context)
-            .load(data.thumbnail)
-            .centerCrop()
-            .transform(RoundedCorners(10))
-            .into(holder.thumbnail)
+        with(holder.binding) {
+
+            playBtn.setOnClickListener {
+                val action =
+                    HomeFragmentDirections.actionHomeFragmentToMediaDrawerFragment(data.audio)
+                root.findNavController().navigate(action)
+            }
+            root.setOnClickListener {
+                val action = HomeFragmentDirections.actionHomeFragmentToDetailFragment(data.id)
+                root.findNavController().navigate(action)
+            }
+            podcastTitle.text = data.podcast.title_original
+            description.text = data.description_original
+            episodeTitle.text = data.title_original
+            Glide.with(root)
+                .load(data.podcast.thumbnail)
+                .placeholder(ColorDrawable(Color.GRAY))
+                .error(ColorDrawable(Color.RED))
+                .centerCrop()
+                .transform(RoundedCorners(10))
+                .into(thumbnail)
+        }
     }
 
     override fun getItemCount(): Int {
