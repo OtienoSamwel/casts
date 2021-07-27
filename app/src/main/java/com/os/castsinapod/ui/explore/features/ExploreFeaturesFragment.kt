@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import com.os.castsinapod.R
 import com.os.castsinapod.ui.explore.adapters.ExploreFragmentAdapter
 
-
+@AndroidEntryPoint
 class ExploreFeaturesFragment : Fragment() {
 
     override fun onCreateView(
