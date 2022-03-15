@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Casts</string>
+    <string name="fragment_home">Fragment One</string>
+    <string name="fragment_explore"> Explore</string>
+    <string name="fragment_search">Search</string>
+    <string name="home">Home</string>
+    <string name="explore">Explore</string>
+    <string name="activity">Activity</string>
+
+    <string name="episodes">%d %s</string>
+</resources>

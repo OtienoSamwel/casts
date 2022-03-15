@@ -1,2 +1,5 @@
-rootProject.name = "Casts In a Pod"
-include ':app'
+rootProject.name = "Casts"
+include ':presentation'
+
+include ':data'
+include ':domain'
