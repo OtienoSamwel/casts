@@ -85,15 +85,15 @@ dependencies {
     implementation "androidx.media3:media3-ui:$media3_version"
 
     //compose
-    implementation 'androidx.compose.ui:ui:1.1.1'
-    implementation 'androidx.compose.ui:ui-tooling:1.1.1'
-    implementation 'androidx.compose.foundation:foundation:1.1.1'
-    implementation 'androidx.compose.material:material:1.1.1'
-    implementation 'androidx.compose.material:material-icons-core:1.1.1'
-    implementation 'androidx.compose.material:material-icons-extended:1.1.1'
+    implementation "androidx.compose.ui:ui:$compose_version"
+    implementation "androidx.compose.ui:ui-tooling:$compose_version"
+    implementation "androidx.compose.foundation:foundation:$compose_version"
+    implementation "androidx.compose.material:material:$compose_version"
+    implementation "androidx.compose.material:material-icons-core:$compose_version"
+    implementation "androidx.compose.material:material-icons-extended:$compose_version"
     implementation 'androidx.activity:activity-compose:1.4.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:2.4.1'
-    implementation 'androidx.compose.runtime:runtime-livedata:1.1.1'
+    implementation "androidx.compose.runtime:runtime-livedata:$compose_version"
 
     //compose navigation
     implementation "androidx.navigation:navigation-compose:$nav_version"
@@ -102,4 +102,13 @@ dependencies {
     //coil compose
     implementation "io.coil-kt:coil-compose:2.0.0-rc01"
 
+    //pager
+    implementation 'com.google.accompanist:accompanist-pager:0.24.4-alpha'
+
+}
+
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
+    kotlinOptions {
+        freeCompilerArgs += "-Xopt-in=kotlin.RequiresOptIn"
+    }
 }

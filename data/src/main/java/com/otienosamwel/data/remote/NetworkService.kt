@@ -44,7 +44,9 @@ object NetworkClient {
             level = LogLevel.ALL
         }
 
-        install(Auth)
+        install(Auth) {
+        }
+
 
         install(HttpCache)
     }

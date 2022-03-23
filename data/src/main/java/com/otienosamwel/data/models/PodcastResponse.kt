@@ -19,7 +19,7 @@ data class Result(
     val audio_length_sec: Int?,
     val description_highlighted: String?,
     val description_original: String?,
-    val explicit_content: Boolean?,
+    val explicit_content: Boolean,
     val guid_from_rss: String?,
     val id: String?,
     val image: String?,

@@ -3,6 +3,7 @@
     package="com.os.casts">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application
         android:name=".CastsApplication"
@@ -10,17 +11,18 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.CastsInAPod">
+        android:theme="@style/Theme.Casts">
         <activity
-            android:name="com.os.casts.ui.features.main.HomeActivity"
-            android:windowSoftInputMode="adjustPan"
-            android:exported="true">
+            android:name="com.os.casts.ui.features.main.MainActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.features.intro.IntroActivity" />
     </application>
 
 </manifest>

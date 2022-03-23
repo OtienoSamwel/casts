@@ -6,9 +6,9 @@ import android.content.Intent
 import android.content.ServiceConnection
 import android.os.Bundle
 import android.os.IBinder
-import android.widget.Toast
+import android.util.Log
+import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -30,49 +30,62 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.os.casts.ui.features.home.Home
-import com.os.casts.ui.theme.CatsTheme
+import com.os.casts.ui.theme.CastTheme
+import com.otienosamwel.data.models.Result
 import com.otienosamwel.domain.playback.PlaybackService
+import com.otienosamwel.domain.playback.PlaybackServiceBinder
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class HomeActivity : AppCompatActivity() {
-
+class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            CatsTheme {
+            CastTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Navigation()
+                    Navigation(this::onPodcastClicked)
                 }
             }
         }
+    }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        unbindService(PlaybackServiceConnection)
     }
 
 
-    override fun onStart() {
-        super.onStart()
-        val intent = Intent(this, PlaybackService::class.java)
-        bindService(intent, Connection(), Context.BIND_AUTO_CREATE)
-    }
-
-    private inner class Connection : ServiceConnection {
+    private object PlaybackServiceConnection : ServiceConnection {
         override fun onServiceConnected(p0: ComponentName?, p1: IBinder?) {
-            Toast.makeText(this@HomeActivity, "connected", Toast.LENGTH_SHORT).show()
+            Log.i(TAG, "onServiceConnected: ${(p1 as PlaybackServiceBinder).getService()}")
         }
 
         override fun onServiceDisconnected(p0: ComponentName?) {
-            Toast.makeText(this@HomeActivity, "not connected", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    companion object {
+        private const val TAG = "MAIN ACTIVITY"
+    }
+
+    private fun onPodcastClicked(podCast: Result) {
+        val intent = Intent(this, PlaybackService::class.java)
+        intent.action = podCast.audio!!
+
+        try {
+            startService(intent)
+            bindService(intent, PlaybackServiceConnection, Context.BIND_AUTO_CREATE)
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 }
 
-
 @Composable
-fun Navigation() {
+fun Navigation(onPodcastClicked: (Result) -> Unit) {
     val navController = rememberNavController()
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -82,7 +95,7 @@ fun Navigation() {
             startDestination = "home",
             modifier = Modifier.padding(it)
         ) {
-            composable(route = "home") { Home() }
+            composable(route = "home") { Home(onPodcastClicked = onPodcastClicked) }
             composable(route = "discover") {}
             composable(route = "account") {}
         }
