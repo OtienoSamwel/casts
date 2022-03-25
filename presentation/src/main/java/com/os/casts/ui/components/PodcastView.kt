@@ -12,6 +12,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import com.os.casts.utils.TimeUtils.toHoursAndMinutes
 import com.otienosamwel.data.models.Result
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -51,10 +52,12 @@ fun PodcastView(podcast: Result, onPodcastClicked: (podcast: Result) -> Unit) {
         SpaceSmall()
 
 
-        Row(modifier = Modifier
-            .padding(horizontal = 8.dp)
-            .fillMaxWidth()) {
-            Chip(onClick = {}) { Text(text = "${podcast.audio_length_sec}") }
+        Row(
+            modifier = Modifier
+                .padding(horizontal = 8.dp)
+                .fillMaxWidth()
+        ) {
+            Chip(onClick = {}) { Text(text = "${podcast.audio_length_sec?.toHoursAndMinutes()}") }
 
             Spacer(modifier = Modifier.weight(1f))
 
@@ -69,7 +72,7 @@ fun PodcastView(podcast: Result, onPodcastClicked: (podcast: Result) -> Unit) {
             Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.Center
         ) {
-            Divider(modifier = Modifier.fillMaxWidth(.9f), color = Color.Gray)
+            Divider(modifier = Modifier.fillMaxWidth(), color = Color.Gray)
         }
 
     }

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.os.casts.ui.features.intro.IntroActivity
 import com.os.casts.ui.features.main.MainActivity
 import com.os.casts.utils.Preferences
 import dagger.hilt.android.AndroidEntryPoint
@@ -19,8 +20,9 @@ class EntryActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         installSplashScreen()
 
-        val activity = MainActivity::class.java
+        val activity = if (preferences.getIntro()) MainActivity::class.java else IntroActivity::class.java
         val intent = Intent(this, activity)
         startActivity(intent)
+        finish()
     }
 }

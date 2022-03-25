@@ -13,14 +13,12 @@ class Preferences @Inject constructor(@ApplicationContext context: Context) {
     private val preferences = context.getSharedPreferences("MY_LIVING_PREFS", Context.MODE_PRIVATE)
 
     fun getToken() = preferences.getString(tokenKey, null)
-
-    fun getIntro() = preferences.getBoolean(introKey, false)
-
     fun setToken(token: String) = preferences.set(tokenKey, token)
 
-    fun setIntro(finished: Boolean) = preferences.set(introKey, finished)
+    fun getIntro() = preferences.getBoolean(introKey, false)
+    fun setIntroDone() = preferences.set(introKey, true)
 
-    operator fun SharedPreferences.set(key: String, value: Any?){
+    operator fun SharedPreferences.set(key: String, value: Any?) {
         when (value) {
             is Int -> edit { this.putInt(key, value) }
             is Long -> edit { this.putLong(key, value) }
