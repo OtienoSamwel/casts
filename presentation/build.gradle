@@ -105,6 +105,9 @@ dependencies {
     //pager
     implementation 'com.google.accompanist:accompanist-pager:0.24.4-alpha'
 
+    //splash screen
+    implementation 'androidx.core:core-splashscreen:1.0.0-beta01'
+
 }
 
 tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {

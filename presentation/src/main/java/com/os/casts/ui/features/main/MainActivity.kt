@@ -13,14 +13,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.AccountCircle
-import androidx.compose.material.icons.rounded.Home
-import androidx.compose.material.icons.rounded.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hierarchy
@@ -29,6 +25,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.os.casts.R.drawable
 import com.os.casts.ui.features.home.Home
 import com.os.casts.ui.theme.CastTheme
 import com.otienosamwel.data.models.Result
@@ -97,7 +94,7 @@ fun Navigation(onPodcastClicked: (Result) -> Unit) {
         ) {
             composable(route = "home") { Home(onPodcastClicked = onPodcastClicked) }
             composable(route = "discover") {}
-            composable(route = "account") {}
+            composable(route = "library") {}
         }
     }
 }
@@ -114,14 +111,12 @@ fun BottomNavigationBar(navController: NavController) {
         myScreens.forEach { screen ->
             BottomNavigationItem(
                 selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
-                icon = { Icon(imageVector = screen.icon, contentDescription = screen.name) },
+                icon = { Icon(painter = painterResource(id = screen.icon), contentDescription = screen.name) },
                 label = { Text(text = screen.name, modifier = Modifier.padding(vertical = 8.dp)) },
                 alwaysShowLabel = true,
                 onClick = {
                     navController.navigate(screen.route) {
-                        popUpTo(navController.graph.findStartDestination().id) {
-                            saveState = true
-                        }
+                        popUpTo(navController.graph.findStartDestination().id) { saveState = true }
                         launchSingleTop = true
                         restoreState = true
                     }
@@ -132,10 +127,10 @@ fun BottomNavigationBar(navController: NavController) {
 }
 
 
-sealed class Screen(val name: String, val icon: ImageVector, val route: String) {
-    object Home : Screen(name = "Home", icon = Icons.Rounded.Home, route = "home")
-    object Discover : Screen(name = "Discover", icon = Icons.Rounded.Search, route = "discover")
-    object Account : Screen(name = "Account", icon = Icons.Rounded.AccountCircle, route = "account")
+sealed class Screen(val name: String, val icon: Int, val route: String) {
+    object Home : Screen(name = "Home", icon = drawable.ic_home, route = "home")
+    object Discover : Screen(name = "Discover", icon = drawable.ic_compass, route = "discover")
+    object Account : Screen(name = "Library", icon = drawable.ic_library, route = "library")
 }
 
 val myScreens = listOf(Screen.Home, Screen.Discover, Screen.Account)

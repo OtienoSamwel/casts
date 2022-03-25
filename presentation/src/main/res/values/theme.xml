@@ -3,4 +3,10 @@
     <style name="Theme.Casts" parent="android:Theme.Material.Light.NoActionBar">
         <item name="android:statusBarColor">@color/black</item>
     </style>
+
+
+    <style name="Theme.Casts.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/cardview_light_background</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
+    </style>
 </resources>
