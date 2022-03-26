@@ -108,6 +108,9 @@ dependencies {
     //splash screen
     implementation 'androidx.core:core-splashscreen:1.0.0-beta01'
 
+    //lottie
+    implementation "com.airbnb.android:lottie-compose:$lottie_version"
+
 }
 
 tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
