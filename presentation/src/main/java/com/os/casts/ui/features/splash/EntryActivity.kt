@@ -19,8 +19,8 @@ class EntryActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         installSplashScreen()
-
-        val activity = if (preferences.getIntro()) MainActivity::class.java else IntroActivity::class.java
+        val hasSeenIntro = preferences.getIntro()
+        val activity = if (hasSeenIntro) MainActivity::class.java else IntroActivity::class.java
         val intent = Intent(this, activity)
         startActivity(intent)
         finish()

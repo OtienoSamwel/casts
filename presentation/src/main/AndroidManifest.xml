@@ -12,13 +12,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Casts">
-        <activity android:name="com.os.casts.ui.features.main.MainActivity" android:exported="false"/>
-        <activity android:name=".ui.features.intro.IntroActivity" android:exported="false" />
-
         <activity
-            android:theme="@style/Theme.Casts.Splash"
+            android:name="com.os.casts.ui.features.main.MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.features.intro.IntroActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.features.splash.EntryActivity"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.Casts.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
