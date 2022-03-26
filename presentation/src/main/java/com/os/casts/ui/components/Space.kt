@@ -1,5 +1,7 @@
 package com.os.casts.ui.components
 
+import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
@@ -19,4 +21,14 @@ fun SpaceMedium() {
 @Composable
 fun SpaceLarge() {
     Spacer(modifier = Modifier.size(40.dp))
+}
+
+@Composable
+fun ColumnScope.SpaceFill() {
+    Spacer(modifier = Modifier.weight(1f))
+}
+
+@Composable
+fun RowScope.SpaceFill() {
+    Spacer(modifier = Modifier.weight(1f))
 }
