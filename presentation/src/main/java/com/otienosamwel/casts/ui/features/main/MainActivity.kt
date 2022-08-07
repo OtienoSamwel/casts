@@ -25,7 +25,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.os.casts.R.drawable
+import com.otienosamwel.casts.R.drawable
 import com.otienosamwel.casts.ui.features.home.Home
 import com.otienosamwel.casts.ui.theme.CastTheme
 import com.otienosamwel.data.models.Result

@@ -8,16 +8,16 @@ plugins {
 }
 
 android {
-    compileSdkVersion 32
+    compileSdkVersion 33
     buildToolsVersion "30.0.3"
 
     buildFeatures {
         compose true
     }
     defaultConfig {
-        applicationId "com.os.castsinapod"
+        applicationId "com.otienosamwel.casts"
         minSdkVersion 21
-        targetSdkVersion 32
+        targetSdkVersion 33
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -58,22 +58,22 @@ dependencies {
     implementation project(":domain")
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.4.1'
-    implementation 'androidx.fragment:fragment-ktx:1.4.1'
-    implementation 'com.google.android.material:material:1.5.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
+    implementation 'androidx.core:core-ktx:1.8.0'
+    implementation 'androidx.appcompat:appcompat:1.4.2'
+
 
     // Hilt
-    implementation "com.google.dagger:hilt-android:2.40"
-    implementation 'com.google.firebase:firebase-crashlytics-ktx:18.2.9'
-    implementation 'com.google.firebase:firebase-analytics-ktx:20.1.2'
-    kapt "com.google.dagger:hilt-compiler:2.40"
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+    kapt "com.google.dagger:hilt-compiler:$hilt_version"
+
+    //firebase crashlytics
+    implementation 'com.google.firebase:firebase-crashlytics-ktx:18.2.12'
+    implementation 'com.google.firebase:firebase-analytics-ktx:21.1.0'
 
 
     // Glide
-    implementation 'com.github.bumptech.glide:glide:4.12.0'
-    kapt 'com.github.bumptech.glide:compiler:4.12.0'
+    implementation 'com.github.bumptech.glide:glide:4.13.2'
+    kapt 'com.github.bumptech.glide:compiler:4.13.2'
 
     // testing
     testImplementation 'junit:junit:4.13.2'
@@ -81,7 +81,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     // ktx for ViewModels
-    implementation "androidx.fragment:fragment-ktx:1.4.1"
+    implementation "androidx.fragment:fragment-ktx:1.5.1"
 
 
     //media3
@@ -95,8 +95,8 @@ dependencies {
     implementation "androidx.compose.material:material:$compose_version"
     implementation "androidx.compose.material:material-icons-core:$compose_version"
     implementation "androidx.compose.material:material-icons-extended:$compose_version"
-    implementation 'androidx.activity:activity-compose:1.4.0'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:2.4.1'
+    implementation 'androidx.activity:activity-compose:1.5.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:2.5.1'
     implementation "androidx.compose.runtime:runtime-livedata:$compose_version"
 
     //compose navigation
@@ -104,13 +104,13 @@ dependencies {
     implementation 'androidx.hilt:hilt-navigation-compose:1.0.0'
 
     //coil compose
-    implementation "io.coil-kt:coil-compose:2.0.0-rc01"
+    implementation 'io.coil-kt:coil-compose:2.1.0'
 
     //pager
-    implementation 'com.google.accompanist:accompanist-pager:0.24.4-alpha'
+    implementation 'com.google.accompanist:accompanist-pager:0.26.0-alpha'
 
     //splash screen
-    implementation 'androidx.core:core-splashscreen:1.0.0-beta01'
+    implementation 'androidx.core:core-splashscreen:1.0.0'
 
     //lottie
     implementation "com.airbnb.android:lottie-compose:$lottie_version"

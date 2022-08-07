@@ -8,7 +8,7 @@ import androidx.compose.ui.unit.dp
 import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.rememberLottieComposition
-import com.os.casts.R
+import com.otienosamwel.casts.R
 
 @Composable
 fun Listening() {

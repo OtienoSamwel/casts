@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.os.casts">
+    package="com.otienosamwel.casts">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Casts">
         <activity
-            android:name="com.os.casts.com.otienosamwel.casts.ui.features.main.MainActivity"
+            android:name="com.otienosamwel.casts.ui.features.main.MainActivity"
             android:exported="false" />
         <activity
             android:name="com.otienosamwel.casts.ui.features.intro.IntroActivity"

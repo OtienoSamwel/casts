@@ -1,10 +1,9 @@
 package com.otienosamwel.data.models
 
-import kotlinx.serialization.Contextual
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import androidx.room.Entity
+import com.google.gson.annotations.SerializedName
 
-@Serializable
+@Entity(tableName = "podcast_response")
 data class PodcastsResponse(
     val count: Int?,
     val next_offset: Int?,
@@ -13,7 +12,6 @@ data class PodcastsResponse(
     val total: Int?
 )
 
-@Serializable
 data class Result(
     val audio: String?,
     val audio_length_sec: Int?,
@@ -25,24 +23,23 @@ data class Result(
     val image: String?,
     val itunes_id: Int?,
     val link: String?,
-    @SerialName("listennotes_url") val listenNotesUrl: String?,
+    @SerializedName("listennotes_url") val listenNotesUrl: String?,
     val podcast: Podcast,
     val pub_date_ms: Long,
     val rss: String?,
     val thumbnail: String?,
     val title_highlighted: String?,
     val title_original: String?,
-    val transcripts_highlighted: List<@Contextual Any?>
+    val transcripts_highlighted: List< Any?>
 )
 
-@Serializable
 data class Podcast(
     val genre_ids: List<Int?>,
     val id: String?,
     val image: String?,
     val listen_score: Int?,
     val listen_score_global_rank: String?,
-    @SerialName("listennotes_url") val listenNotesUrl: String?,
+    @SerializedName("listennotes_url") val listenNotesUrl: String?,
     val publisher_highlighted: String?,
     val publisher_original: String?,
     val thumbnail: String?,

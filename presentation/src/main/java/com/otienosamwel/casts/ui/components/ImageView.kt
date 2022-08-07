@@ -15,7 +15,7 @@ import coil.compose.SubcomposeAsyncImage
 import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.rememberLottieComposition
-import com.os.casts.R
+import com.otienosamwel.casts.R
 
 @Composable
 fun ImageView(imageUri: String, imageSize: Dp, padding: Dp = 8.dp) {

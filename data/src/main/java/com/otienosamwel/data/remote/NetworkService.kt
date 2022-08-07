@@ -6,15 +6,11 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import io.ktor.client.*
 import io.ktor.client.engine.cio.*
-import io.ktor.client.features.*
-import io.ktor.client.features.auth.*
-import io.ktor.client.features.cache.*
-import io.ktor.client.features.json.*
-import io.ktor.client.features.json.serializer.*
-import io.ktor.client.features.logging.*
-import io.ktor.client.request.*
+import io.ktor.client.plugins.*
+import io.ktor.client.plugins.contentnegotiation.*
+import io.ktor.client.plugins.logging.*
 import io.ktor.http.*
-import kotlinx.serialization.ExperimentalSerializationApi
+import io.ktor.serialization.gson.*
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -22,7 +18,6 @@ object NetworkClient {
 
     private const val BASE_URL = "listen-api-test.listennotes.com"
 
-    @OptIn(ExperimentalSerializationApi::class)
     private val client = HttpClient(CIO) {
 
         defaultRequest {
@@ -30,28 +25,21 @@ object NetworkClient {
             contentType(ContentType.Application.Json)
         }
 
-        install(JsonFeature) {
-            serializer = KotlinxSerializer(kotlinx.serialization.json.Json {
-                isLenient = true
-                prettyPrint = true
-                ignoreUnknownKeys = true
-                explicitNulls = false
-            })
+        install(ContentNegotiation) {
+
+            gson {
+                setLenient()
+                setPrettyPrinting()
+                serializeNulls()
+            }
         }
 
         install(Logging) {
             logger = Logger.ANDROID
             level = LogLevel.ALL
         }
-
-        install(Auth) {
-        }
-
-
-        install(HttpCache)
     }
 
     @Provides
     fun provideClient(): HttpClient = client
-
 }
