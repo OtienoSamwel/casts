@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "153471500433",
+    "project_id": "casts-1e44b",
+    "storage_bucket": "casts-1e44b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:153471500433:android:6d7c1eddd92bc6c9f3bf30",
+        "android_client_info": {
+          "package_name": "com.os.castsinapod"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "153471500433-e50k1pup4fvcr5f96l9ssrqg0kkfsc2c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqIZ21vjxUjknLizc64yPG6Z4sfc6GaE8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "153471500433-e50k1pup4fvcr5f96l9ssrqg0kkfsc2c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

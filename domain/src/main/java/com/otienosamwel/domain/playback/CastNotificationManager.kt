@@ -15,7 +15,6 @@ class CastNotificationManager @Inject constructor(
     @ApplicationContext private val context: Context,
 ) {
 
-
     val notificationManager: PlayerNotificationManager =
         PlayerNotificationManager.Builder(context, NOTIFICATION_ID, NOTIFICATION_CHANNEL_ID)
             .setMediaDescriptionAdapter(DescriptionAdapter())
