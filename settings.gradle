@@ -2,4 +2,3 @@ rootProject.name = "Casts"
 include ':presentation'
 
 include ':data'
-include ':domain'

@@ -7,7 +7,7 @@ import io.ktor.client.call.*
 import io.ktor.client.request.*
 import javax.inject.Inject
 
-class PodcastService @Inject constructor(private val client: HttpClient) {
+class PodcastNetworkService @Inject constructor(private val client: HttpClient) {
 
     suspend fun searchPodcasts(query: String): PodcastsResponse {
         return client.get("/api/v2/search") {

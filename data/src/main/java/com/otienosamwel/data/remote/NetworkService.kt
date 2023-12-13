@@ -33,11 +33,6 @@ object NetworkClient {
                 serializeNulls()
             }
         }
-
-        install(Logging) {
-            logger = Logger.ANDROID
-            level = LogLevel.ALL
-        }
     }
 
     @Provides

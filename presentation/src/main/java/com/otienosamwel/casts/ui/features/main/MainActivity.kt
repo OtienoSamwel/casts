@@ -1,23 +1,28 @@
 package com.otienosamwel.casts.ui.features.main
 
 import android.content.ComponentName
-import android.content.Context
-import android.content.Intent
-import android.content.ServiceConnection
 import android.os.Bundle
-import android.os.IBinder
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.*
+import androidx.compose.material.BottomNavigation
+import androidx.compose.material.BottomNavigationItem
+import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Surface
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.media3.common.MediaItem
+import androidx.media3.session.MediaController
+import androidx.media3.session.SessionToken
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
@@ -25,16 +30,23 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.google.common.util.concurrent.MoreExecutors
 import com.otienosamwel.casts.R.drawable
+import com.otienosamwel.casts.player.PlaybackService
 import com.otienosamwel.casts.ui.features.home.Home
 import com.otienosamwel.casts.ui.theme.CastTheme
 import com.otienosamwel.data.models.Result
-import com.otienosamwel.domain.playback.PlaybackService
-import com.otienosamwel.domain.playback.PlaybackServiceBinder
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+    companion object {
+        private val TAG = MainActivity::class.simpleName ?: "MainActivity"
+    }
+
+    private var mediaController: MediaController? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -49,34 +61,23 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        unbindService(PlaybackServiceConnection)
-    }
+    override fun onStart() {
+        super.onStart()
 
-
-    private object PlaybackServiceConnection : ServiceConnection {
-        override fun onServiceConnected(p0: ComponentName?, p1: IBinder?) {
-            Log.i(TAG, "onServiceConnected: ${(p1 as PlaybackServiceBinder).getService()}")
-        }
-
-        override fun onServiceDisconnected(p0: ComponentName?) {
-        }
-    }
-
-    companion object {
-        private const val TAG = "MAIN ACTIVITY"
+        val sessionToken = SessionToken(this, ComponentName(this, PlaybackService::class.java))
+        val controllerFuture = MediaController.Builder(this, sessionToken).buildAsync()
+        controllerFuture.addListener({
+            mediaController = controllerFuture.get()
+        }, MoreExecutors.directExecutor())
     }
 
     private fun onPodcastClicked(podCast: Result) {
-        val intent = Intent(this, PlaybackService::class.java)
-        intent.action = podCast.audio!!
-
-        try {
-            startService(intent)
-            bindService(intent, PlaybackServiceConnection, Context.BIND_AUTO_CREATE)
-        } catch (e: Exception) {
-            e.printStackTrace()
+        Log.i(TAG, "onPodcastClicked: link -> ${podCast.audio}")
+        mediaController?.let { controller ->
+            val mediaItem = MediaItem.fromUri(podCast.audio!!)
+            controller.setMediaItem(mediaItem)
+            controller.prepare()
+            controller.play()
         }
     }
 }
@@ -111,7 +112,12 @@ fun BottomNavigationBar(navController: NavController) {
         myScreens.forEach { screen ->
             BottomNavigationItem(
                 selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
-                icon = { Icon(painter = painterResource(id = screen.icon), contentDescription = screen.name) },
+                icon = {
+                    Icon(
+                        painter = painterResource(id = screen.icon),
+                        contentDescription = screen.name
+                    )
+                },
                 label = { Text(text = screen.name, modifier = Modifier.padding(vertical = 8.dp)) },
                 alwaysShowLabel = true,
                 onClick = {

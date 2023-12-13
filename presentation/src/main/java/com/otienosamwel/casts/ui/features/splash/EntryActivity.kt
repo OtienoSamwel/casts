@@ -20,7 +20,7 @@ class EntryActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         installSplashScreen()
         val hasSeenIntro = preferences.getIntro()
-        val activity = if (hasSeenIntro) MainActivity::class.java else IntroActivity::class.java
+        val activity = if (hasSeenIntro) MainActivity::class.java else MainActivity::class.java
         val intent = Intent(this, activity)
         startActivity(intent)
         finish()
